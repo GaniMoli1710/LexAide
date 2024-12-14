@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - LexAide</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f4f8;
+        }
+        .container {
+            max-width: 500px;
+            margin-top: 100px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-title {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .error-message {
+            color: red;
+            display: none; /* Initially hidden */
+        }
+        .google-btn {
+            margin-top: 10px;
+            background-color: white;
+            color: #444;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .google-btn:hover {
+            background-color: #f1f1f1;
+        }
+        .google-btn img {
+            width: 20px;
+            margin-right: 10px;
+        }
+        .btn-success {
+            background-color: #2e3b55;
+            border: none;
+        }
+
+    </style>
+</head>
+<body>
+    {% load static %}
+    <div class="container bg-white">
+            <h3 class="form-title text-center">LexAide Login</h3>
+            <p class="text-center text-muted">Access your account to manage legal research and assistance tools</p>
+
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Login</button>
+
+            {% if messages %}
+            <div id="error" class="error-message text-center">
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </form>
+
+        <div class="google-btn" id="googleSignInButton">
+            <img src="{% static 'img/G logo.webp' %}" alt="Google logo">
+            <span>Sign in with Google</span>
+        </div>
+
+        <div class="text-center forgot-password mt-3">
+            <a href="{% url 'forgot_password' %}">Forgot your password?</a>
+        </div>
+
+        <div class="text-center signup-link mt-2">
+            <p>New to LexAide? <a href="{% url 'signup' %}">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Load Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-analytics.js";
+    
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyASMdS69fhvzkCPqJO_6-H0Ca-N7nz5dyc",
+            authDomain: "lexaide-f6ed3.firebaseapp.com",
+            projectId: "lexaide-f6ed3",
+            storageBucket: "lexaide-f6ed3.appspot.com",
+            messagingSenderId: "68374574618",
+            appId: "1:68374574618:web:cd4577b65fba49f93703a3",
+            measurementId: "G-R06HR9ZSD4"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+    
+        // Sign in with Google using redirect
+        function signInWithGoogle() {
+            console.log("Attempting to sign in with Google...");
+            const provider = new GoogleAuthProvider();
+    
+            signInWithRedirect(auth, provider)
+                .then(() => {
+                    console.log("Redirecting to Google for sign-in...");
+                })
+                .catch((error) => {
+                    console.error("Error during Google sign-in:", error);
+                    const errorDiv = document.getElementById('error');
+    
+                    if (errorDiv) {
+                        // Clear previous error messages
+                        errorDiv.innerHTML = "";
+    
+                        // Display appropriate error message based on the error code
+                        switch (error.code) {
+                            case 'auth/popup-closed-by-user':
+                                errorDiv.innerHTML = "<p>The sign-in popup was closed before completing the sign-in process. Please try again and ensure you complete the sign-in.</p>";
+                                break;
+                            case 'auth/network-request-failed':
+                                errorDiv.innerHTML = "<p>Network error. Please check your internet connection and try again.</p>";
+                                break;
+                            default:
+                                errorDiv.innerHTML = `<p>${error.message}</p>`;
+                                break;
+                        }
+                        errorDiv.style.display = "block"; // Show error message
+                    } else {
+                        console.error("Error div not found.");
+                    }
+                });
+        }
+    
+        // Handle the result of the Google redirect
+        getRedirectResult(auth)
+            .then((result) => {
+                if (result) {
+                    console.log("Google sign-in successful:", result);
+                    if (result.user) {
+                        console.log("User details:", result.user);
+                        window.location.href = "/home"; // Redirect after successful login
+                    }
+                } else {
+                    console.log("No user found after redirect.");
+                }
+            })
+            .catch((error) => {
+                console.error("Error after Google redirect sign-in:", error);
+            });
+    
+        // Event listener for Google sign-in button
+        document.addEventListener('DOMContentLoaded', function() {
+            const googleButton = document.getElementById('googleSignInButton');
+            if (googleButton) {
+                googleButton.addEventListener('click', signInWithGoogle);
+                console.log("Google sign-in button event listener attached.");
+            } else {
+                console.error("Google sign-in button not found.");
+            }
+        });
+    </script>
+    
+</body>
+</html>

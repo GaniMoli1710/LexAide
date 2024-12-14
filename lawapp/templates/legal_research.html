@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficient Legal Research</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #f9f9f9;
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: #007bff;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Legal Research</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <!-- Introduction -->
+        <div class="text-center mb-4">
+            <h1>Efficient Legal Research</h1>
+            <p>Streamline your legal research with AI-powered tools designed to save time and enhance accuracy.</p>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#learnMoreModal">Learn More</button>
+        </div>
+
+        <!-- Features Section -->
+        <section id="features" class="mt-5">
+            <h2>Features</h2>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <i class="feature-icon fas fa-search"></i>
+                    <h4>AI-Powered Search</h4>
+                    <p>Get relevant case laws, statutes, and precedents quickly using our advanced AI search.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="feature-icon fas fa-filter"></i>
+                    <h4>Smart Filters</h4>
+                    <p>Narrow results by jurisdiction, date, and more for precise results.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="feature-icon fas fa-file-alt"></i>
+                    <h4>Document Analysis</h4>
+                    <p>Upload documents for AI-based insights and case summaries.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="mt-5">
+            <h2>How It Works</h2>
+            <p>Follow these steps to get started:</p>
+            <ul class="list-group">
+                <li class="list-group-item">Enter your query in the search bar.</li>
+                <li class="list-group-item">Use filters to narrow down results.</li>
+                <li class="list-group-item">Analyze results and view summaries.</li>
+            </ul>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="mt-5">
+            <h2>Pricing</h2>
+            <p>Choose from our subscription plans to access premium features.</p>
+            <button class="btn btn-outline-info" onclick="showPricingDetails()">See Pricing Details</button>
+            <div id="pricingDetails" class="collapse mt-3">
+                <ul class="list-group">
+                    <li class="list-group-item">Free Trial: Explore features at no cost for the first 7 days.</li>
+                    <li class="list-group-item">Premium Plan: Monthly and yearly subscriptions available.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section id="contact" class="mt-5">
+            <h2>Contact and Support</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea class="form-control" id="message" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <p>Disclaimer: This platform assists with legal research and is not a substitute for professional legal advice.</p>
+    </footer>
+
+    <!-- Learn More Modal -->
+    <div class="modal fade" id="learnMoreModal" tabindex="-1" aria-labelledby="learnMoreModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="learnMoreModalLabel">Learn More About Our Features</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Our AI-powered legal research platform provides robust tools to help you quickly find relevant case laws and analyze legal documents with precision. Explore our features to experience efficient legal research.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript for Toggle Pricing Details -->
+    <script>
+        function showPricingDetails() {
+            $('#pricingDetails').collapse('toggle');
+        }
+    </script>
+</body>
+</html>

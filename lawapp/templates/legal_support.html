@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Support</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://source.unsplash.com/1600x400/?law') center/cover;
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .card {
+            border: none;
+            transition: 0.3s;
+        }
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: scale(1.03);
+        }
+        .btn-primary {
+            background-color: #0069d9;
+            border-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Legal Support</h1>
+        <p>Find the nearest lawyers and get legal advice at your fingertips, powered by AI.</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2>Nearby Lawyers</h2>
+                <p class="text-muted">Get instant access to experienced legal professionals near you.</p>
+            </div>
+            <div class="col-md-4 text-md-right">
+                <button class="btn btn-primary" onclick="findNearbyLawyers()">Find Lawyers Near Me</button>
+            </div>
+        </div>
+
+        <!-- Lawyers Listing -->
+        <div id="lawyersList" class="row">
+            <!-- Lawyer cards will be appended here via JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Sample data for nearby lawyers (could be replaced with dynamic data)
+        const lawyers = [
+            { name: "John Doe", specialty: "Criminal Law", rating: 4.8, distance: "2 km away" },
+            { name: "Jane Smith", specialty: "Family Law", rating: 4.5, distance: "3 km away" },
+            { name: "Robert Williams", specialty: "Corporate Law", rating: 4.7, distance: "5 km away" },
+            { name: "Lucy Brown", specialty: "Immigration Law", rating: 4.6, distance: "4.5 km away" }
+        ];
+
+        // Function to populate lawyer cards
+        function findNearbyLawyers() {
+            const lawyersList = document.getElementById("lawyersList");
+            lawyersList.innerHTML = ""; // Clear any existing content
+
+            // Dynamically create a card for each lawyer
+            lawyers.forEach(lawyer => {
+                const card = `
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">${lawyer.name}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">${lawyer.specialty}</h6>
+                                <p class="card-text">Rating: ${lawyer.rating} ⭐ | ${lawyer.distance}</p>
+                                <button class="btn btn-primary">Contact</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                lawyersList.insertAdjacentHTML("beforeend", card);
+            });
+        }
+    </script>
+
+    <!-- Bootstrap JS & dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

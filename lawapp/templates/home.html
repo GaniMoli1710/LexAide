@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - LexAide</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .navbar {
+            background-color: #2d3e50;
+        }
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .dropdown-menu {
+            background-color: #2d3e50;
+        }
+        .dropdown-item {
+            color: #fff !important;
+            transition: background-color 0.3s ease;
+        }
+        .dropdown-item:hover {
+            background-color: #44566c;
+        }
+        .jumbotron {
+            background-color: #2d3e50;
+            color: #fff;
+            padding: 2rem 1.5rem;
+            border-radius: 10px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            margin: 1rem 0; /* Add margin for spacing */
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-title {
+            color: #2d3e50;
+        }
+        .btn-primary {
+            background-color: #44566c;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2d3e50;
+        }
+        .feature-img {
+            width: 100%; /* Make the image responsive */
+            height: 400px; /* Set a fixed height */
+            object-fit: cover; /* Maintain aspect ratio */
+            border-radius: 8px 8px 0 0; /* Rounded top corners */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">LexAide</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/legal-research">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="/document-analysis">Case Laws</a></li>
+                <li class="nav-item"><a class="nav-link" href="/legal-support">Nearby Lawyers</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">Profile</a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="/profile">Account Dashboard</a>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Logout Confirmation Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to log out?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a href="/login" class="btn btn-primary">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="container mt-5">
+        <div class="jumbotron text-center shadow-sm">
+            <h1>Welcome to LexAide!</h1>
+            <p>Streamline your legal research, access case laws, and connect with experts with ease.</p>
+            <a href="/profile" class="btn btn-primary">Go to Dashboard</a>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row mt-4">
+           
+            <div class="col-md-12">
+                <div class="card shadow-sm p-4 text-center">
+                    <img src="{% static 'img/feature2.png' %}" alt="Document Analysis" class="feature-img">
+                    <h3 class="card-title">Document Analysis</h3>
+                    <p class="card-text">Analyze complex legal documents in seconds.</p>
+                    <a href="/document-analysis" class="btn btn-primary">Analyze Now</a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card shadow-sm p-4 text-center">
+                    <img src="{% static 'img/feature3.webp' %}" alt="Legal Support" class="feature-img">
+                    <h3 class="card-title">Legal Support</h3>
+                    <p class="card-text">Get quick legal advice and find nearby lawyers based on your location.</p>
+                    <a href="/legal-support" class="btn btn-primary">Locate Lawyers</a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card shadow-sm p-4 text-center">
+                    <img src="{% static 'img/feature4.jpg' %}" alt="Legal Bot" class="feature-img">
+                    <h3 class="card-title">Legal Bot</h3>
+                    <p class="card-text">Interact with our AI-powered legal bot for instant responses to your legal queries.</p>
+                    <a href="/legal-bot" class="btn btn-primary">Chat Now</a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card shadow-sm p-4 text-center">
+                    <img src="{% static 'img/feature1.png' %}" alt="Efficient Legal Research" class="feature-img">
+                    <h3 class="card-title">Efficient Legal Research</h3>
+                    <p class="card-text">Streamline your legal research with AI-driven analysis.</p>
+                    <a href="/legal-research" class="btn btn-primary">Start Research</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
